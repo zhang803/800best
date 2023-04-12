@@ -3,8 +3,8 @@
 欢迎使用百世生活OA接口，用于测试和演示目的。该接口包含了一些基本的操作，如登录和获取用户信息，但实际上并不会执行任何真正的操作。
 
 ## 登录地址
-
-`http://oa.800best.life/best/oa`
+OA地址：http://oa.800best.com
+新OA地址：http://oa.800best.life/best/oa
 
 ## 接口认证
 
