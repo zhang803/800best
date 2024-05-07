@@ -3,7 +3,7 @@
 //
 
 const app = {
-  key: 'oakey800best@com'
+  key: 'oalifekey800best@com'
   // domain: 'oa.800best.com'
   domain: 'oa.800best.life'
   loginUrl: '/best/oa'
