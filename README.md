@@ -1,9 +1,9 @@
 # 百世生活OA接口调用
 
-欢迎使用百世生活OA接口，用于测试和演示目的。
+百世生活OA接口，用于测试外部接口调用。
 
-## 登录地址
-OA地址：http://oa.800best.com
+## 地址
+原OA地址：http://oa.800best.com/best/getConfig
 
 新OA地址：http://oa.800best.life/best/oa
 
@@ -14,5 +14,8 @@ OA地址：http://oa.800best.com
 ## 接口列表
 - /best/api/v2/getExpress
 - /best/api/v2/delExpress
+- /best/api/v2/listExpress
+- /best/api/v2/print/dynamicTemplate
+- /best/api/v2/print/dynamicTemplate2xml
 
 
