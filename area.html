@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>百世区域页面</title>
+		<meta name="renderer" content="webkit">
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- 项目基准路径 -->
+		<base href="/bestinc/" />
+		
+		<!-- 引入layui的css -->
+		<link rel="stylesheet" href="static/layui/css/layui.css"  media="all">
+		
+		<!-- 引入自定义工具css -->
+		<!-- <link rel="stylesheet" href="static/css/base/area/riparea.css"  media="all"> -->
+		
+		<link rel="stylesheet" href="static/css/util.css"  media="all">
+		
+		<!-- 引入jqeury -->
+		<script src="static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- 引入layui的js -->
+		<script src="static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- 引入资源js -->
+		<script src="static/js/base/area/area.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="content">
+		<!-- <form id="upload" enctype="multipart/form-data" method="post">
+		     <input type="file" name="file" id="file"/>
+		     <input type="button" value="提交" onclick="uploadPic();"/>
+		     <span class="showUrl"></span>
+		 </form> -->
+		<!-- 头部搜索框 -->
+		<div id="search-header">
+		  <form class="layui-form">
+		      <div class="layui-form-item">
+		        <div class="layui-inline">
+		          <label class="layui-form-label">省</label>
+		          <div class="layui-input-inline">
+		            <input type="text" name="province" id="province" placeholder="请输入" autocomplete="off" class="layui-input">
+		          </div>
+		        </div>
+		        <div class="layui-inline">
+		          <label class="layui-form-label">市</label>
+		          <div class="layui-input-inline">
+		            <input type="text" name="city" id="city" placeholder="请输入" autocomplete="off" class="layui-input">
+		          </div>
+		        </div>
+		        <div class="layui-inline">
+		          <label class="layui-form-label">县</label>
+		          <div class="layui-input-inline">
+		            <input type="text" name="district" id="district" placeholder="请输入" autocomplete="off" class="layui-input">
+		          </div>
+		        </div>
+		        <div class="layui-inline">
+		          <label class="layui-form-label">邮编</label>
+		          <div class="layui-input-inline">
+		            <input type="text" name="postcode" id="postcode" placeholder="请输入" autocomplete="off" class="layui-input">
+		          </div>
+		        </div>
+		        <div class="layui-inline">
+		          <label class="layui-form-label">简码</label>
+		          <div class="layui-input-inline">
+		            <input type="text" name="shortcode" id="shortcode" placeholder="请输入" autocomplete="off" class="layui-input">
+		          </div>
+		        </div>
+		        <div class="layui-inline">
+		          <label class="layui-form-label">城市编码</label>
+		          <div class="layui-input-inline">
+		            <input type="text" name="citycode" id="citycode" placeholder="请输入" autocomplete="off" class="layui-input">
+		          </div>
+		        </div>
+		        <div class="layui-inline">
+		          <label class="layui-form-label">所属区域</label>
+		          <div class="layui-input-inline">
+		            <input type="text" name="attrArea" id="attrArea" placeholder="请输入" autocomplete="off" class="layui-input">
+		          </div>
+		        </div>
+		        
+		        <div class="layui-inline">
+		          <label class="layui-form-label">是否可用</label>
+		          <div class="layui-input-inline">
+		          	 <select name="useable" lay-filter="useable">
+				        <option value=""></option>
+				        <option value="Y">可用</option>
+				        <option value="N">不可用</option>
+				      </select>
+		          </div>
+		        </div>
+		        <div class="layui-inline">
+		          <label class="layui-form-label"></label>
+		           <div class="layui-input-inline">
+		            <button class="layui-btn" lay-submit="" lay-filter="resourceSearchBtn" id="resourceSearchBtn">
+		            	<i class="layui-icon layui-icon-search"></i>
+		            	查询
+		            </button>
+		            <button class="layui-btn" type="reset">
+		            	<i class="layui-icon layui-icon-refresh"></i>
+		            	重置
+		            </button>
+		          </div>
+		        </div>
+		      </div>
+	      </form>
+	    </div>
+		<!-- 数据表格 -->
+		<div id="dataDiv">
+		<table class="layui-hide" id="areaTable" lay-filter="areaTableEvent">
+		
+		</table>
+		</div>
+		
+		<!-- 修改模态框 -->
+		<div id="updateAreaModal" class="definedModal">
+			<!-- 这里手动加表单样式 -->
+			<form id="updateAreaForm" lay-filter="updateAreaForm" class="layui-form" action="">
+			<input type="hidden" id="_method" name="_method" />
+			<input type="hidden" id="areaId" name="areaId" />
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">省</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="province" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">市</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="city" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">县</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="district" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">邮编</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="postcode" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">简码</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="shortcode" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">城市编码</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="citycode" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">区域级别</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="areaLevel" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">所属区域</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="attrArea" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">城市级别</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="cityLevel" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">是否可以</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="useable" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item layui-form-text">
+			    <label class="layui-form-label">描述</label>
+			    <div class="layui-input-block">
+			      <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button type="submit" class="layui-btn" lay-submit="" lay-filter="updateAreaBtn">立即提交</button>
+			      <button type="button" class="layui-btn modalClose">关闭</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+		<!--  -->
+	    <!-- 头部工具栏 -->
+		<script type="text/html" id="areaToolbar">
+  			<div class="layui-btn-group">
+				<button lay-event="updateArea" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon">&#xe642;</i>修改</button>
+    			<button lay-event="removeResource" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon">&#xe702;</i>禁用</button>
+				<button lay-event="restoreArea" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon">&#xe666;</i>恢复</button>
+				<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" id="test3">
+						 <i class="layui-icon"></i>上传文件
+	  			</button>
+  			</div>
+		</script>
+		
+		<!-- 状态 -->
+		<script type="text/html" id="checkboxTpl">
+    		<input type="checkbox" lay-filter="areable" value="{{d.areaId}}" lay-skin="switch" lay-text="冻结|还原" {{d.useable=='Y'?'checked':''}}/>
+		</script>
+		
+	<!-- <script type="text/javascript">
+    	function uploadPic() {
+  	         var form = document.getElementById('upload'),
+  	             formData = new FormData(form);
+  	          $.ajax({
+  	              url:"execl/import",
+  	              type:"post",
+  	              data:formData,
+  	              processData:false,
+  	             contentType:false,
+  	             success:function(res){
+  	                 if(res){
+  	                     alert("上传成功！");
+  	                 }
+  	                 console.log(res);
+  	             },
+  	             error:function(err){
+  	                 alert("网络连接失败,稍后重试",err);
+  	             }
+  	         })
+  	     }
+    </script> -->
+    </div>
+	</body>
+</html>
