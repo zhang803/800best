@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+	<head>
+		<meta charset="UTF-8">
+		<title>百世物流管理系统</title>
+		<!-- 项目基准路径 -->
+		<base href="/bestinc/" />
+
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+		<link rel="icon" href="static/images/favicon.ico">
+		<link rel="stylesheet" href="static/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="static/css/font.css">
+		<link rel="stylesheet" href="static/css/xadmin.css">
+		<link rel="stylesheet" href="static/css/theme2200.min.css" />
+
+		<script type="text/javascript" src="static/js/jquery.min.js"></script>
+		<script type="text/javascript" src="static/lib/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="static/js/xadmin.js"></script>
+		<script type="text/javascript" src="static/js/system/myPanels/mydata.js"></script>
+	</head>
+	<body class="index">
+		<!-- 顶部开始 -->
+		<div class="container">
+			<div class="logo">
+				<a href="./index.html">百世管理系统</a>
+			</div>
+			<div class="left_open">
+				<a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
+			</div>
+			<div style="float: left; margin-top: 15px; margin-left: 10px;width: 450px;">
+				<iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tx&skin=pitaya" frameborder="0" width="100%" height="30" fontsize="16px" allowtransparency="true"></iframe>
+			</div>
+			<ul class="layui-nav right" lay-filter="">
+				<!-- 消息提示 -->
+				<li class="layui-nav-item">
+					<a class="layui-icon" style="font-size: 20px; color: #ededf2;">&#xe667;</a>
+				</li>
+			</ul>
+		</div>
+		<!-- 顶部结束 -->
+		
+		<!-- 左侧菜单开始 -->
+		<div class="left-nav">
+			<div id="side-nav">
+				<ul id="nav">
+					<li>
+						<div class="user-panel" style="margin: 20px 0px 30px;">
+							<a class="menuItem" title="个人中心" href="javascript:;" data-index="0" style="margin: 0px 5px;">
+								<div class="layui-hide">个人中心</div>
+								<div class="layui-inline">
+									<img id="headImage" src="" class="layui-circle" style="width: 80px; height: 80px;">
+								</div>
+							</a>
+							<div class="pull-left info">
+								<p style="line-height: 30px; color: #fff;" id="userName">xxx</p>
+								<a href="javascript:;"><i class="layui-icon" style="color:#1c84c6;">&#xe617;</i> 在线</a>
+								<a href="javascript:;" style="padding-left:5px;" id="quit"><i class="layui-icon" style="color: #ed5565;">&#xe67a;</i> 注销</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<i class="layui-icon left-nav-li" lay-tips="我的面板">&#xe638;</i>
+							<cite>我的面板</cite>
+							<i class="iconfont nav_right">&#xe697;</i></a>
+						<ul class="sub-menu">
+							<li>
+								<a onclick="xadmin.add_tab('个人信息','views/system/myPanels/mydata.html')">
+									<i class="iconfont">&#xe6a7;</i>
+									<cite>个人信息</cite>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<!-- 动态渲染 -->
+					<span id="dynamicMenu"></span>
+				</ul>
+			</div>
+		</div>
+		<!-- 左侧菜单结束 -->
+		
+		<!-- 右侧主体开始 -->
+		<div class="page-content">
+			<div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+				<ul class="layui-tab-title">
+					<li class="home">
+						<i class="layui-icon">&#xe68e;</i>我的桌面
+					</li>
+				</ul>
+				<div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+					<dl>
+						<dd data-type="this">关闭当前</dd>
+						<dd data-type="other">关闭其它</dd>
+						<dd data-type="all">关闭全部</dd>
+					</dl>
+				</div>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show">
+						<iframe src="views/welcome.html" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+					</div>
+				</div>
+				<div id="tab_show"></div>
+			</div>
+		</div>
+		<div class="page-content-bg"></div>
+		<!-- 右侧主体结束 -->
+
+		<script>
+			$(function() {
+				
+				localStorage.removeItem("cate");
+				localStorage.removeItem("tab_list");
+				
+				//登录的用户
+				var user = null;
+				//查询服务器session储存的用户对象
+				$.ajax({
+					async: false,
+					url: "page/getUser",
+					type: "get",
+					success: function(result) {
+						user = result;
+						if (user == null) {
+							location.href = "login.html";
+						} else {
+							sessionStorage.setItem("user", JSON.stringify(result));
+							$("#userName").text(result.userName);
+							$("#headImage").attr('src', result.headImage);
+						}
+					}
+				});
+
+				//渲染左侧菜单
+				$.ajax({
+					async: false,
+					url: "system/power/userHasResource",
+          // url: "http://kdinter.800best.com/system/power/userHasResource"
+					type: "post",
+					success: function(result) {
+						//转为树形数据
+						var treeData = toTreeData(result, "resourceId", "parentId", "children", "0000000000000000");
+						//清空
+						$("#dynamicMenu").html("");
+						//定义一个存储拼接好的左侧菜单的字符串
+						var dynamicMenuStr = "";
+						//递归拼接左侧菜单
+						var dynamicMenu = function(treeData) {
+							for (let i in treeData) {
+								//如果当前资源有URL说明能够点击，意味着它没有子资源了
+								if (typeof(treeData[i].resourceUrl) != "undefined" && treeData[i].resourceUrl != "") {
+									dynamicMenuStr += "<li><a onclick=\"xadmin.add_tab('"+treeData[i].resourceName+"', '"+treeData[i].resourceUrl+"')\"><i class='iconfont'>&#xe6a7;</i><cite>"+treeData[i].resourceName+"</cite></a>";
+								} else {
+									var icon = "&#xe6fa;";
+									if (treeData[i].resourceRank == "1") {
+										switch (treeData[i].resourceName) {
+											case "系统管理":icon="&#xe6ae;";break;
+											case "基本设置":icon="&#xe6a2;";break;
+											case "取派管理":icon="&#xe718;";break;
+											case "中转管理":icon="&#xe6ce;";break;
+											case "路由管理":icon="&#xe71b;";break;
+											case "财务管理":icon="&#xe702;";break;
+											case "经营管理报表":icon="&#xe757;";break;
+											case "财务管理报表":icon="&#xe723;";break;
+										}
+									}
+									dynamicMenuStr += "<li><a href='javascript:;'><i class='iconfont left-nav-li'>"+icon+"</i><cite>"+treeData[i].resourceName+"</cite><i class='iconfont nav_right'>&#xe697;</i></a>"
+								}
+								if (typeof(treeData[i].children) != "undefined" && treeData[i].children.length > 0) {
+									dynamicMenuStr += "<ul class='sub-menu'>";
+									dynamicMenu(treeData[i].children); // 递归
+									dynamicMenuStr += "</ul>";
+								} 
+								dynamicMenuStr += "</li>";
+							}
+						}
+						//调用渲染菜单的方法
+						dynamicMenu(treeData);
+						//显示到页面
+						$("#dynamicMenu").append(dynamicMenuStr);
+					}
+				});
+
+				//退出事件
+				$("#quit").click(function() {
+					//询问					
+					layer.confirm('确认退出吗?', {icon: 3, title:'提示'}, function(index){
+						layer.close(index);
+						//删除浏览器会话缓存的用户
+						sessionStorage.removeItem("user");
+						//清除服务器session会话里面的用户对象
+						$.get("page/clearUser", function(data) {
+							//跳转到登录页面
+							location.href = "login.html";
+						});
+					});
+				});
+			})
+
+			//扁形数据转树形数据
+			function toTreeData(source, idName, parentIdName, childrenName, parentId) {
+				let cloneData = JSON.parse(JSON.stringify(source));
+				return cloneData.filter(father => {
+					let branchArr = cloneData.filter(child => father[idName] == child[parentIdName]);
+					branchArr.length > 0 ? father[childrenName] = branchArr : '';
+					return father[parentIdName] == parentId;
+				});
+			}
+		</script>
+	</body>
+</html>
