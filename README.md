@@ -7,6 +7,8 @@
 
 新OA地址：http://oa.800best.life/best/oa
 
+开放平台：https://open.800best.com/
+
 ## 接口认证
 
 使用 OAuth 2.0 进行认证
