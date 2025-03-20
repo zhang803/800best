@@ -1,23 +1,37 @@
 # 百世生活OA接口调用
 
-百世生活OA接口，用于测试外部接口调用。
+百世OA接口，用于测试外部接口调用。
 
-## 地址
-原OA地址：http://oa.800best.com/best/getConfig
+### 介绍
+测试百世物流生活OA接口、CICD发布
 
-新OA地址：http://oa.800best.life/best/oa
+- 原接口：https://oa.800best.com/best/getConfig
+- 新接口：
+    - http://oa.best-inc.top/best/api/getConfig
+    - http://oa.best-inc.top/best/api/health
 
-开放平台：https://open.800best.com/
+- 快运接口（已废弃）：https://v5.800best.com/v5/getConfig
+- EDI接口：https://sgp-edi.800best.com/v5/getConfig
+- 开放平台：https://open.800best.com/
 
-## 接口认证
+### 接口认证
+所有接口均采用 OAuth 2.0 认证机制，使用 access_token 作为访问凭据。
+```
+Authorization: Bearer {access_token}
+Content-Type: application/json
+```
 
-使用 OAuth 2.0 进行认证
 
-## 接口列表
-- /best/api/v2/getExpress
-- /best/api/v2/delExpress
-- /best/api/v2/listExpress
-- /best/api/v2/print/dynamicTemplate
-- /best/api/v2/print/dynamicTemplate2xml
+### 接口列表
+| 接口路径                  | 描述                 | 请求方法 | 参数示例                    |
+|---------------------------|-----------------------|------------|----------------------------|
+| `/best/api/getExpress`      | 获取指定快递信息       | `GET`        | `?tracking_no=` |
+| `/best/api/delExpress`      | 删除指定快递记录       | `POST`       | `{"tracking_no": ""}` |
+| `/best/api/listExpress`     | 获取快递记录列表       | `GET`        | `?page=1&page_size=20` |
+
+### 🩺 健康检查接口
+| 接口路径                    | 描述                   | 请求方法 | 返回示例                  |
+|-----------------------------|-------------------------|------------|----------------------------|
+| `/best/api/health`           | 健康检查                | `GET`        | `{ "status": "success" }`        |
 
 
