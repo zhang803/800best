@@ -1,11 +1,11 @@
 // 百世生活OA调用接口
 // code by Zhang.lock@800best.com
-//
+// date: 2025-03-19T10:00:00Z
 
 const app = {
   key: 'oalifekey800best@com'
   // domain: 'oa.800best.com'
-  domain: 'oa.800best.life'
+  domain: 'oa.best-inc.top'
   loginUrl: '/best/oa'
   username: 'best_oa'
   password: 'your_password' // password: 'Abc2467#123'
