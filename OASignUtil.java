@@ -61,7 +61,7 @@ public class OaLifeSignUtil {
         //=====================OA=============
 
         AccountValidateRequest request = new AccountValidateRequest();
-        request.setPassword("Abc2467#123");
+        request.setPassword("Ace080933");
         String bizData = JSON.toJSONString(request);
         Map<String, String> params = new HashMap<>();
         params.put("partnerID", "OA_TEST");
@@ -102,14 +102,14 @@ public class OaLifeSignUtil {
 
     public static String post() {
         // URL of the API endpoint
-        String url = "http://oa.best-inc.top/best/oa";
+        String url = "http://oa.800best.icu/best/oa";
 
         // Create a map to hold the form data
         Map<String, Object> formData = new HashMap<>();
         formData.put("serviceType", "CUSTOMER");
         formData.put("partnerKey", "OA12345");
         formData.put("sign", "ccdf76b5fe158066818731fccdf24919");
-        formData.put("bizData", "{\"password\":\"Abc2467#123\"}");
+        formData.put("bizData", "{\"password\":\"Ace080933\"}");
         formData.put("partnerID", "OA_TEST");
 
         HttpResponse response = HttpRequest.post(url)
