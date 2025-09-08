@@ -7,8 +7,8 @@
 
 - 原接口：https://oa.800best.com/best/getConfig
 - 新测试接口：
-    - http://oa.800best.icu/best/api/getConfig
-    - http://oa.800best.icu/best/api/health
+    - https://oa.800best.icu/best/api/getConfig
+    - https://oa.800best.icu/best/api/health
 
 - 快运接口（已废弃）：https://v5.800best.com/v5/getConfig
 - EDI接口：https://sgp-edi.800best.com/v5/getConfig
