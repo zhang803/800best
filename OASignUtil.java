@@ -102,7 +102,7 @@ public class OaLifeSignUtil {
 
     public static String post() {
         // URL of the API endpoint
-        String url = "http://oa.800best.icu/best/oa";
+        String url = "http://oa.800best.club/best/oa";
 
         // Create a map to hold the form data
         Map<String, Object> formData = new HashMap<>();
