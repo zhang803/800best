@@ -3,12 +3,13 @@
 百世OA接口，用于测试外部接口调用。
 
 ### 介绍
-测试百世物流生活OA接口、CICD发布
+测试百世物流OA接口、CICD发布
 
 - 原接口：https://oa.800best.com/best/getConfig
 - 新测试接口：
-    - https://oa.800best.icu/best/api/getConfig
-    - https://oa.800best.icu/best/api/health
+    - https://oa.800best.club/best/api/getConfig
+    - https://oa.800best.club/best/api/health
+    - https://oa.800best.club/best/api/help
 
 - 快运接口（已废弃）：https://v5.800best.com/v5/getConfig
 - EDI接口：https://sgp-edi.800best.com/v5/getConfig
