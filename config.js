@@ -5,7 +5,7 @@
 const app = {
   key: 'oalifekey800best@com'
   // domain: 'oa.800best.com'
-  domain: 'oa.800best.icu'
+  domain: 'oa.800best.club'
   loginUrl: '/best/oa'
   username: 'best_oa'
   password: 'your_password' // password: 'Abc2467#123'
