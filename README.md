@@ -3,7 +3,7 @@
 百世OA接口，用于测试外部接口调用。
 
 ### 介绍
-测试百世物流OA接口、CICD发布
+测试百世物流（百世快递）OA接口、CICD发布
 
 - 原接口：https://oa.800best.com/best/getConfig
 - 新测试接口：
@@ -12,8 +12,8 @@
     - https://oa.800best.club/best/api/help
 
 - 快运接口（已废弃）：https://v5.800best.com/v5/getConfig
-- EDI接口：https://sgp-edi.800best.com/v5/getConfig
 - 开放平台：https://open.800best.com/
+- 登录地址：https://oa.800best.club/best/oa
 
 ### 接口认证
 所有接口均采用 OAuth 2.0 认证机制，使用 access_token 作为访问凭据。
