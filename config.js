@@ -10,7 +10,7 @@ const app = {
   username: 'best_oa'
   password: 'your_password' // password: 'Abc2467#123'
   bid:'oapi_0x5f3759df_v1_cli_a36ae2528df0900b'
-  apidev: 'http://oa.800best.life/best/oa'
+  apidev: 'http://oa.800best.club/best/oa'
 
 };  
 
