@@ -11,9 +11,10 @@
     - https://oa.800best.club/best/api/health
     - https://oa.800best.club/best/api/help
 
-- 快运接口（已废弃）：https://v5.800best.com/v5/getConfig
+- 快运接口（已废弃，使用新的接口）：https://v5.800best.com/v5/getConfig
 - 开放平台：https://open.800best.com/
 - 登录地址：https://oa.800best.club/best/oa
+- Gitlab Test: https://oa.800best.club/best/gitlab
 
 ### 接口认证
 所有接口均采用 OAuth 2.0 认证机制，使用 access_token 作为访问凭据。
